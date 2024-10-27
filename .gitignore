@@ -23,6 +23,36 @@ tags
 .DS_Store
 .directory
 *.debug
+# Игнорирование сборочных файлов
+build/
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# Игнорирование временных файлов Qt
+.qtc_clangd/
+*.user
+*.pro.user
+*.pro.user.*
+
+
+build/
+build/Desktop-Debug/
+build/Desktop-Debug/.qtc_clangd/
+
+# Игнорирование других временных файлов
+*.log
+*.cache
+*.idx
+*.db
+.DS_Store
+Thumbs.db
+
 Makefile*
 *.prl
 *.app
