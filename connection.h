@@ -7,6 +7,6 @@
 
 
 bool createConnetion();
-bool createTable();
+
 
 #endif // CONNECTION_H

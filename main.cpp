@@ -8,8 +8,6 @@ int main(int argc, char *argv[])
     MainWindow w;
     if(!createConnetion())
         return 1;
-    else
-        createTable();
     w.show();
     return a.exec();
 }
