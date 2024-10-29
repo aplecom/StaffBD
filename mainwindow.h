@@ -41,5 +41,6 @@ private slots:
     void authorizeUser();
     void registerWindowShow();
     void registerUser();
+    void backWindow();
 };
 #endif // MAINWINDOW_H

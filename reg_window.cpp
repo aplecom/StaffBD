@@ -39,7 +39,6 @@ QString reg_window::getPass()
     return m_userPass;
 }
 
-
 void reg_window::on_confirmLe_textEdited(const QString &arg1)
 {
     reg_window::m_confirm = arg1;
@@ -49,5 +48,10 @@ void reg_window::on_confirmLe_textEdited(const QString &arg1)
 bool reg_window::checkPass()
 {
     return (m_confirm==getPass());
+}
+
+void reg_window::on_backBtn_clicked()
+{
+    emit back_button_clicked();
 }
 

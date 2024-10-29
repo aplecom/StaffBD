@@ -20,12 +20,14 @@ public:
 
 signals:
     void register_button_clicked();
+    void back_button_clicked();
 
 private slots:
     void on_registerBtn_clicked();
     void on_loginLe_textEdited(const QString &arg1);
     void on_passLe_textEdited(const QString &arg1);
     void on_confirmLe_textEdited(const QString &arg1);
+    void on_backBtn_clicked();
 
 private:
     Ui::reg_window *ui;

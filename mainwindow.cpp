@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&ui_Auth,SIGNAL(register_button_clicked()),this,SLOT(registerWindowShow()));
     connect(&ui_Reg,SIGNAL(register_button_clicked()),this,SLOT(registerUser()));
     connect(&ui_Reg,SIGNAL(destroyed()),this,SLOT(show()));
+    connect(&ui_Reg,SIGNAL(back_button_clicked()),this,SLOT(backWindow()));
 
     connection.createConneсtion();
     connection.createTable();
@@ -61,5 +62,11 @@ void MainWindow::registerUser()
 
 void MainWindow::display()
 {
+    ui_Auth.show();
+}
+
+void MainWindow::backWindow()
+{
+    ui_Reg.close();
     ui_Auth.show();
 }
