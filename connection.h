@@ -4,9 +4,22 @@
 #include <QMessageBox>
 #include <QtSql>
 #include <QSqlDatabase>
+#include <QString>
 
+class Connection{
+private:
+    QSqlDatabase db;
+    QString db_input;
+    bool m_loginSuccesfull;
+    int userCounter;
 
-bool createConnetion();
+public:
+    Connection();
+    void createConneсtion();
+    void createTable();
+    bool autoUser(QString& m_username,QString& m_userpass);
+
+};
 
 
 #endif // CONNECTION_H

@@ -2,6 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QtDebug>
+#include <QString>
+
+#include "auth_window.h"
+#include "reg_window.h"
+#include "connection.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -16,8 +22,24 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void display();
+
+
 
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow *ui_Main;
+
+    auth_window ui_Auth;
+    reg_window ui_Reg;
+
+    QString m_username;
+    QString m_userpass;
+
+    Connection connection;
+
+private slots:
+    void authorizeUser();
+    void registerWindowShow();
+    void registerUser();
 };
 #endif // MAINWINDOW_H
