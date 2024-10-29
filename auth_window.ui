@@ -26,27 +26,7 @@
     <property name="sizeConstraint">
      <enum>QLayout::SetDefaultConstraint</enum>
     </property>
-    <item row="3" column="2">
-     <widget class="QLineEdit" name="passLe"/>
-    </item>
-    <item row="4" column="2">
-     <widget class="QPushButton" name="loginBtn">
-      <property name="text">
-       <string>Войти</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="2">
-     <widget class="QLineEdit" name="loginLe"/>
-    </item>
-    <item row="5" column="2">
-     <widget class="QPushButton" name="registerBtn">
-      <property name="text">
-       <string>Регистрация</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="2">
+    <item row="1" column="1">
      <widget class="QLabel" name="authLb">
       <property name="frameShape">
        <enum>QFrame::NoFrame</enum>
@@ -68,26 +48,37 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="loginLb">
+    <item row="4" column="1">
+     <widget class="QPushButton" name="loginBtn">
       <property name="text">
-       <string>Логин</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
+       <string>Войти</string>
       </property>
      </widget>
     </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="passLb">
-      <property name="text">
-       <string>Пароль</string>
-      </property>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="passLe">
       <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
-      <property name="textInteractionFlags">
-       <set>Qt::LinksAccessibleByMouse</set>
+      <property name="placeholderText">
+       <string>Пароль</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QPushButton" name="registerBtn">
+      <property name="text">
+       <string>Регистрация</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="loginLe">
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="placeholderText">
+       <string>Логин</string>
       </property>
      </widget>
     </item>

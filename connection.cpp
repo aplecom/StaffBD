@@ -23,6 +23,11 @@ void Connection::createConneсtion()
 
 void Connection:: createTable()
 {
+    if(db.tables().contains("employees"))
+    {
+        qDebug()<<"Таблица employees уже существует";
+        return;
+    }
     QSqlQuery query(db);
     db_input = "CREATE TABLE employees ( "
                    "number INTEGER PRIMARY KEY NOT NULL,"
@@ -35,7 +40,7 @@ void Connection:: createTable()
         QMessageBox::warning(0,"Ошибка","Создание таблицы не произошло");
     }
     else
-        QMessageBox::warning(0,"Успешно","Создана таблица");
+        QMessageBox::information(0,"Успешно","Создана таблица с сотруднкиами");
 
 }
 
@@ -46,31 +51,34 @@ bool Connection::autoUser(QString& m_username,QString& m_userpass)
     QString str_t = "SELECT * FROM employees WHERE name = '%1'";
 
 
-    QString username = "";
-    QString userpass = "";
+    QString username;
+    QString userpass;
 
     db_input = str_t.arg(m_username);
 
     if(!query.exec(db_input))
     {
-        qDebug()<<"Не удается выполнить запрос"<<query.lastError()<<" : "<<query.lastQuery();
-        QMessageBox::warning(0,"Ошибка","Не удалось выполнить запрос на поиск поля");
+        qDebug()<<"Ошибка запроса "<<query.lastError()<<" : "<<query.lastQuery();
         return false;
     }
-    QMessageBox::warning(0,"Успех","Удалось выполнить запрос на поиск поля");
-    rec = query.record(); // метаданные ( какие есть поля в табл)
-    query.next(); // переход к первой записи
+
+    query.next();
+    rec = query.record(); // метаданные ( имена столбцов, индексы и типы данных)
+
     userCounter = query.value(rec.indexOf("number")).toInt();
     username = query.value(rec.indexOf("name")).toString();
     userpass = query.value(rec.indexOf("pass")).toString();
-    if(m_username != username || m_userpass != userpass)
+    if(m_username != username || m_userpass != userpass || m_username == "")
     {
+
         qDebug() << "Данные неверны" << username << " " << userpass;
         QMessageBox::warning(0,"Ошибка","Данные неверны");
-         return false;
+        return false;
     }
     m_loginSuccesfull = true;
     return true;
+
+
 }
 
 
