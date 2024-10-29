@@ -14,7 +14,7 @@ class reg_window : public QWidget
 public:
     explicit reg_window(QWidget *parent = nullptr);
     ~reg_window();
-    QString getName();
+    QString getLogin();
     QString getPass();
     bool checkPass();
 

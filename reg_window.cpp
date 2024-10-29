@@ -30,7 +30,7 @@ void reg_window::on_passLe_textEdited(const QString &arg1)
     reg_window::m_userPass = arg1;
 }
 
-QString reg_window::getName()
+QString reg_window::getLogin()
 {
     return m_userName;
 }
@@ -43,5 +43,11 @@ QString reg_window::getPass()
 void reg_window::on_confirmLe_textEdited(const QString &arg1)
 {
     reg_window::m_confirm = arg1;
+}
+
+
+bool reg_window::checkPass()
+{
+    return (m_confirm==getPass());
 }
 

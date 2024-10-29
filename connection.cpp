@@ -44,7 +44,7 @@ void Connection:: createTable()
 
 }
 
-bool Connection::autoUser(QString& m_username,QString& m_userpass)
+bool Connection::autoUser(const QString& m_username, const QString& m_userpass)
 {
     QSqlQuery query(db);
     QSqlRecord rec;
@@ -77,8 +77,43 @@ bool Connection::autoUser(QString& m_username,QString& m_userpass)
     }
     m_loginSuccesfull = true;
     return true;
+}
 
+bool Connection::getLogS()
+{
+    return m_loginSuccesfull;
+}
 
+bool Connection::regUser(const QString& m_username,const QString& m_userpass)
+{
+    QSqlQuery query(db);
+    QSqlRecord rec;
+    QString str_t = "SELECT COUNT(*) FROM employees;";
+    db_input = str_t;
+    if(!query.exec(db_input))
+    {
+        qDebug() << "Не удается получить номер при регистрации " << query.lastError() << " : " << query.lastQuery();
+        QMessageBox::warning(0,"Ошибка","Не удается получить номер при регистрации");
+        return false;
+    }
+    else {
+         query.next();
+        rec = query.record();
+        userCounter = query.value(0).toInt();
+        qDebug() << userCounter;
+    }
+    userCounter++;
+    query.prepare("INSERT INTO employees (number, name, pass) VALUES (?, ?, ?);");
+    query.addBindValue(userCounter);
+    query.addBindValue(m_username);
+    query.addBindValue(m_userpass);
+    if(!query.exec())
+    {
+        qDebug() << "Не удалось добавить данные в БД"  << query.lastError() << " : " << query.lastQuery();
+        QMessageBox::warning(0,"Ошибка","Не удалось добавить данные в БД");
+        return false;
+    }
+    return true;
 }
 
 

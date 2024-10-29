@@ -43,7 +43,20 @@ void MainWindow::registerWindowShow()
 }
 void MainWindow::registerUser()
 {
-
+    m_username = ui_Reg.getLogin();
+    m_userpass = ui_Reg.getPass();
+    if ( m_username=="" && m_userpass=="")
+        QMessageBox::information(0,"Ошибка","Данные не должны быть пустыми");
+    else if(ui_Reg.checkPass())
+    {
+        if(connection.regUser(m_username,m_userpass))
+        {
+            ui_Reg.close();
+            ui_Auth.show();
+        }
+    }
+    else
+        QMessageBox::information(0,"Ошибка","Паролои не совпадают");
 }
 
 void MainWindow::display()
