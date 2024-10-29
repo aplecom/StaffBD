@@ -88,12 +88,23 @@ bool Connection::regUser(const QString& m_username,const QString& m_userpass)
 {
     QSqlQuery query(db);
     QSqlRecord rec;
-    QString str_t = "SELECT COUNT(*) FROM employees;";
+    QString str_t = "SELECT * FROM employees WHERE name = '%1'";
+    db_input = str_t.arg(m_username);
+    if(!query.exec(db_input))
+    {
+        qDebug()<<"Ошибка запроса"<<query.lastError()<<" : "<<query.lastQuery();
+    }
+    query.next();
+    rec = query.record();
+    QString name = query.value(rec.indexOf("name")).toString();
+    if(name==m_username)
+        return false;
+
+    str_t = "SELECT COUNT(*) FROM employees;";
     db_input = str_t;
     if(!query.exec(db_input))
     {
         qDebug() << "Не удается получить номер при регистрации " << query.lastError() << " : " << query.lastQuery();
-        QMessageBox::warning(0,"Ошибка","Не удается получить номер при регистрации");
         return false;
     }
     else {
@@ -110,7 +121,6 @@ bool Connection::regUser(const QString& m_username,const QString& m_userpass)
     if(!query.exec())
     {
         qDebug() << "Не удалось добавить данные в БД"  << query.lastError() << " : " << query.lastQuery();
-        QMessageBox::warning(0,"Ошибка","Не удалось добавить данные в БД");
         return false;
     }
     return true;

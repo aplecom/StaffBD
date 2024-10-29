@@ -46,7 +46,7 @@ void MainWindow::registerUser()
 {
     m_username = ui_Reg.getLogin();
     m_userpass = ui_Reg.getPass();
-    if ( m_username=="" && m_userpass=="")
+    if ( m_username=="" || m_userpass=="")
         QMessageBox::information(0,"Ошибка","Данные не должны быть пустыми");
     else if(ui_Reg.checkPass())
     {
@@ -55,9 +55,11 @@ void MainWindow::registerUser()
             ui_Reg.close();
             ui_Auth.show();
         }
+        else
+            QMessageBox::information(0,"Занято","Пользователь с таким логином уже существует");
     }
     else
-        QMessageBox::information(0,"Ошибка","Паролои не совпадают");
+        QMessageBox::information(0,"Ошибка","Пароли не совпадают");
 }
 
 void MainWindow::display()
