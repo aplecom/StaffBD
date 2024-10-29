@@ -29,8 +29,9 @@ void MainWindow::authorizeUser()
 {
     m_username = ui_Auth.getLogin();
     m_userpass = ui_Auth.getPass();
-
-    if(connection.autoUser(m_username,m_userpass))
+    if ( m_username=="" || m_userpass=="")
+        QMessageBox::information(0,"Ошибка","Данные не должны быть пустыми");
+    else if(connection.autoUser(m_username,m_userpass))
     {
         ui_Auth.close();
         ui_Reg.close();

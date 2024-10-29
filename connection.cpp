@@ -13,12 +13,7 @@ void Connection::createConneсtion()
     db.setUserName("ilya");
     db.setPassword("");
     if(!db.open())
-    {
-        QMessageBox::warning(0,"Ошибка",db.lastError().text());
-    }
-    else{
-        QMessageBox::warning(0,"Успешно","Соединение с БД установлено!");
-    }
+        qDebug()<<"Не удалось открыть БД "<<db.lastError().text();
 }
 
 void Connection:: createTable()
@@ -35,13 +30,7 @@ void Connection:: createTable()
                    "pass VARCHAR(12));";
 
     if(!query.exec(db_input))
-    {
-        qDebug()<<"Ошибка создания таблицы: "<<query.lastError();
-        QMessageBox::warning(0,"Ошибка","Создание таблицы не произошло");
-    }
-    else
-        QMessageBox::information(0,"Успешно","Создана таблица с сотруднкиами");
-
+        qDebug()<<"Ошибка создания таблицы: "<<query.lastError().text();
 }
 
 bool Connection::autoUser(const QString& m_username, const QString& m_userpass)
@@ -58,7 +47,7 @@ bool Connection::autoUser(const QString& m_username, const QString& m_userpass)
 
     if(!query.exec(db_input))
     {
-        qDebug()<<"Ошибка запроса "<<query.lastError()<<" : "<<query.lastQuery();
+        qDebug()<<"Ошибка запроса "<<query.lastError().text()<<" : "<<query.lastQuery();
         return false;
     }
 
@@ -92,7 +81,7 @@ bool Connection::regUser(const QString& m_username,const QString& m_userpass)
     db_input = str_t.arg(m_username);
     if(!query.exec(db_input))
     {
-        qDebug()<<"Ошибка запроса"<<query.lastError()<<" : "<<query.lastQuery();
+        qDebug()<<"Ошибка запроса"<<query.lastError().text()<<" : "<<query.lastQuery();
     }
     query.next();
     rec = query.record();
@@ -104,7 +93,7 @@ bool Connection::regUser(const QString& m_username,const QString& m_userpass)
     db_input = str_t;
     if(!query.exec(db_input))
     {
-        qDebug() << "Не удается получить номер при регистрации " << query.lastError() << " : " << query.lastQuery();
+        qDebug() << "Не удается получить номер при регистрации " << query.lastError().text() << " : " << query.lastQuery();
         return false;
     }
     else {
@@ -120,7 +109,7 @@ bool Connection::regUser(const QString& m_username,const QString& m_userpass)
     query.addBindValue(m_userpass);
     if(!query.exec())
     {
-        qDebug() << "Не удалось добавить данные в БД"  << query.lastError() << " : " << query.lastQuery();
+        qDebug() << "Не удалось добавить данные в БД"  << query.lastError().text() << " : " << query.lastQuery();
         return false;
     }
     return true;
