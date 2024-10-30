@@ -97,7 +97,7 @@ bool Connection::regUser(const QString& m_username,const QString& m_userpass)
         return false;
     }
     else {
-         query.next();
+        query.next();
         rec = query.record();
         userCounter = query.value(0).toInt();
         qDebug() << userCounter;

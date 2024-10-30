@@ -16,7 +16,6 @@ MainWindow::MainWindow(QWidget *parent)
     connection.createConneсtion();
     connection.createTable();
 
-
     ui_Main->setupUi(this);
 }
 
@@ -35,6 +34,7 @@ void MainWindow::authorizeUser()
     {
         ui_Auth.close();
         ui_Reg.close();
+        printTable();
         this->show();
     }
 }
@@ -72,4 +72,11 @@ void MainWindow::backWindow()
 {
     ui_Reg.close();
     ui_Auth.show();
+}
+
+void MainWindow::printTable(){
+    QSqlTableModel *model = new QSqlTableModel;
+    model->setTable("employees");
+    model->select();
+    ui_Main->tableView->setModel(model);
 }

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtDebug>
 #include <QString>
+#include <QSqlTableModel>
 
 #include "auth_window.h"
 #include "reg_window.h"
@@ -23,7 +24,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void display();
-
+    void printTable();
 
 
 private:
