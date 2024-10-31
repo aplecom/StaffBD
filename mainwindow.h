@@ -19,7 +19,6 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-    QSqlTableModel *model;
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -27,22 +26,23 @@ public:
     void display();
     void printTable();
 
-
 private:
     Ui::MainWindow *ui_Main;
-
-    auth_window ui_Auth;
-    reg_window ui_Reg;
+    auth_window ui_auth;
+    reg_window ui_reg;
 
     QString m_username;
     QString m_userpass;
 
     Connection connection;
+    QSqlTableModel *model;
+
 
 private slots:
     void authorizeUser();
     void registerWindowShow();
     void registerUser();
-    void backWindow();
+    void backWindowAuth();
+    void on_backBtn_clicked();
 };
 #endif // MAINWINDOW_H

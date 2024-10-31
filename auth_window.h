@@ -2,7 +2,7 @@
 #define AUTH_WINDOW_H
 
 #include <QWidget>
-
+#include <QTimer>
 namespace Ui {
 class auth_window;
 }
@@ -16,6 +16,8 @@ public:
     ~auth_window();
     QString getLogin();
     QString getPass();
+    void printInfo(const QString& msg);
+    void resetInfo();
 
 signals:
     void login_button_clicked();
@@ -27,10 +29,13 @@ private slots:
     void on_loginLe_textEdited(const QString &arg1);
     void on_passLe_textEdited(const QString &arg1);
 
+
 private:
-    Ui::auth_window *ui;
+    Ui::auth_window *ui_Auth;
     QString m_username;
     QString m_userpass;
+    QTimer* timer;
+
 };
 
 #endif // AUTH_WINDOW_H

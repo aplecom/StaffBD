@@ -3,14 +3,19 @@
 
 reg_window::reg_window(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::reg_window)
+    , ui_Reg(new Ui::reg_window)
 {
-    ui->setupUi(this);
+    timer = new QTimer(this);
+    timer->setSingleShot(true);
+
+    connect(timer, &QTimer::timeout, this, &reg_window::resetInfo);
+
+    ui_Reg->setupUi(this);
 }
 
 reg_window::~reg_window()
 {
-    delete ui;
+    delete ui_Reg;
 }
 
 void reg_window::on_registerBtn_clicked()
@@ -55,3 +60,13 @@ void reg_window::on_backBtn_clicked()
     emit back_button_clicked();
 }
 
+void reg_window::printInfo(const QString& msg)
+{
+    ui_Reg->infoLb->setText(msg);
+    timer->start(1000);
+}
+
+void reg_window::resetInfo()
+{
+    ui_Reg->infoLb->setText("");
+}

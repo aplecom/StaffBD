@@ -2,6 +2,7 @@
 #define REG_WINDOW_H
 
 #include <QWidget>
+#include <QTimer>
 
 namespace Ui {
 class reg_window;
@@ -17,6 +18,8 @@ public:
     QString getLogin();
     QString getPass();
     bool checkPass();
+    void printInfo(const QString& msg);
+    void resetInfo();
 
 signals:
     void register_button_clicked();
@@ -30,10 +33,11 @@ private slots:
     void on_backBtn_clicked();
 
 private:
-    Ui::reg_window *ui;
+    Ui::reg_window *ui_Reg;
     QString m_userName;
     QString m_userPass;
     QString m_confirm;
+    QTimer* timer;
 };
 
 #endif // REG_WINDOW_H

@@ -20,6 +20,7 @@ public:
     bool autoUser(const QString& m_username, const QString& m_userpass);
     bool regUser(const QString& m_username,const QString& m_userpass);
     bool getLogS();
+
 };
 
 

@@ -3,14 +3,20 @@
 
 auth_window::auth_window(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::auth_window)
+    , ui_Auth(new Ui::auth_window)
 {
-    ui->setupUi(this);
+    timer = new QTimer(this);
+    timer->setSingleShot(true);
+
+    connect(timer, &QTimer::timeout, this, &auth_window::resetInfo);
+    //connect(timer, SIGNAL(timeout()), this, SLOT(resetInfo())); почему не работает ???
+
+    ui_Auth->setupUi(this);
 }
 
 auth_window::~auth_window()
 {
-    delete ui;
+    delete ui_Auth;
 }
 
 void auth_window::on_loginBtn_clicked()
@@ -46,3 +52,15 @@ QString auth_window:: getPass()
 {
     return auth_window::m_userpass;
 }
+
+void auth_window::printInfo(const QString& msg)
+{
+    ui_Auth->infoLb->setText(msg);
+    timer->start(1000);
+}
+
+void auth_window::resetInfo()
+{
+    ui_Auth->infoLb->setText("");
+}
+

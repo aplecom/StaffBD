@@ -38,8 +38,6 @@ bool Connection::autoUser(const QString& m_username, const QString& m_userpass)
     QSqlQuery query(db);
     QSqlRecord rec;
     QString str_t = "SELECT * FROM employees WHERE name = '%1'";
-
-
     QString username;
     QString userpass;
 
@@ -61,7 +59,6 @@ bool Connection::autoUser(const QString& m_username, const QString& m_userpass)
     {
 
         qDebug() << "Данные неверны" << username << " " << userpass;
-        QMessageBox::warning(0,"Ошибка","Данные неверны");
         return false;
     }
     m_loginSuccesfull = true;
@@ -114,5 +111,3 @@ bool Connection::regUser(const QString& m_username,const QString& m_userpass)
     }
     return true;
 }
-
-
