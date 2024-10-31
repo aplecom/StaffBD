@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui_Main(new Ui::MainWindow)
 {
+
     connect(&ui_Auth,SIGNAL(login_button_clicked()),this,SLOT(authorizeUser()));
     connect(&ui_Auth,SIGNAL(destroyed()),this,SLOT(show()));
     connect(&ui_Auth,SIGNAL(register_button_clicked()),this,SLOT(registerWindowShow()));
@@ -15,8 +16,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     connection.createConneсtion();
     connection.createTable();
+    model = new QSqlTableModel;
 
     ui_Main->setupUi(this);
+
+
 }
 
 MainWindow::~MainWindow()
@@ -75,8 +79,10 @@ void MainWindow::backWindow()
 }
 
 void MainWindow::printTable(){
-    QSqlTableModel *model = new QSqlTableModel;
+
     model->setTable("employees");
     model->select();
+    model->sort(0,Qt::AscendingOrder);
+
     ui_Main->tableView->setModel(model);
 }
