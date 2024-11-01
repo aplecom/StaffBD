@@ -65,6 +65,8 @@ void MainWindow::registerUser()
             ui_reg.close();
             ui_auth.show();
         }
+        else if(m_username.length()>20 || m_userpass > 12)
+            ui_reg.printInfo("Сократите логин или пароль");
         else
             ui_reg.printInfo("Пользователь с таким логином уже существует");
     }

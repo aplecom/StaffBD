@@ -85,6 +85,7 @@ bool Connection::regUser(const QString& m_username,const QString& m_userpass)
     QString name = query.value(rec.indexOf("name")).toString();
     if(name==m_username)
         return false;
+    // сюда все перенести
 
     str_t = "SELECT COUNT(*) FROM employees;";
     db_input = str_t;
