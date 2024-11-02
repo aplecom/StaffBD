@@ -9,7 +9,7 @@ auth_window::auth_window(QWidget *parent)
     timer->setSingleShot(true);
 
     connect(timer, &QTimer::timeout, this, &auth_window::resetInfo);
-    //connect(timer, SIGNAL(timeout()), this, SLOT(resetInfo())); почему не работает ???
+    //QObject::connect(timer, SIGNAL(timeout()), this, SLOT(resetInfo())); //почему не работает ???
 
     ui_Auth->setupUi(this);
 }

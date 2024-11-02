@@ -16,7 +16,12 @@ private:
 public:
     Connection();
     void createConneсtion();
-    void createTable();
+    void crTbEmployees();
+    void crTbDepartment();
+    void crTbPosition();
+    void crTbAccessLevel();
+    void crTbPersonalData();
+    void alTable();
     bool autoUser(const QString& m_username, const QString& m_userpass);
     bool regUser(const QString& m_username,const QString& m_userpass);
     bool getLogS();

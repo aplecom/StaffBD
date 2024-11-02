@@ -14,7 +14,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&ui_reg,SIGNAL(back_button_clicked()),this,SLOT(backWindowAuth()));
 
     connection.createConneсtion();
-    connection.createTable();
+    connection.crTbAccessLevel();
+    connection.crTbDepartment();
+    connection.crTbPosition();
+    connection.crTbPersonalData();
+    connection.crTbEmployees();
+    connection.alTable();
+
     model = new QSqlTableModel;
     model->setTable("employees");
     ui_Main->setupUi(this);
@@ -65,7 +71,7 @@ void MainWindow::registerUser()
             ui_reg.close();
             ui_auth.show();
         }
-        else if(m_username.length()>20 || m_userpass > 12)
+        else if(m_username.length()>20 || m_userpass.length() > 12)
             ui_reg.printInfo("Сократите логин или пароль");
         else
             ui_reg.printInfo("Пользователь с таким логином уже существует");

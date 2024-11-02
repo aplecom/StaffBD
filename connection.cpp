@@ -16,7 +16,7 @@ void Connection::createConneсtion()
         qDebug()<<"Не удалось открыть БД "<<db.lastError().text();
 }
 
-void Connection:: createTable()
+void Connection:: crTbEmployees()
 {
     if(db.tables().contains("employees"))
     {
@@ -24,13 +24,98 @@ void Connection:: createTable()
         return;
     }
     QSqlQuery query(db);
-    db_input = "CREATE TABLE employees ( "
-                   "number INTEGER PRIMARY KEY NOT NULL,"
-                   "name VARCHAR(20), "
-                   "pass VARCHAR(12));";
+    db_input = "CREATE TABLE employees ("
+               "id SERIAL PRIMARY KEY,"
+               "number INTEGER UNIQUE NOT NULL,"
+               "name VARCHAR(100) NOT NULL,"
+               "position_id INTEGER REFERENCES position(id) ON DELETE SET NULL,"
+               "department_id INTEGER REFERENCES department(id) ON DELETE SET NULL,"
+               "access_id INTEGER REFERENCES accessLevel(id) ON DELETE SET NULL,"
+               "login VARCHAR(50) UNIQUE NOT NULL,"
+               "password VARCHAR(50) NOT NULL);";
+
+    if(!query.exec(db_input))
+        qDebug()<<"Ошибка создания таблицы: "<<query.lastError();
+}
+
+void Connection:: crTbDepartment()
+{
+    if(db.tables().contains("department"))
+    {
+        qDebug()<<"Таблица department уже существует";
+        return;
+    }
+    QSqlQuery query(db);
+    db_input ="CREATE TABLE department ("
+                "id SERIAL PRIMARY KEY,"
+                "name VARCHAR(100) NOT NULL );";
+    if(!query.exec(db_input))
+        qDebug()<<"Ошибка создания таблицы: "<<query.lastError().text();
+
+}
+
+void Connection:: crTbPosition()
+{
+    if(db.tables().contains("position"))
+    {
+        qDebug()<<"Таблица position уже существует";
+        return;
+    }
+    QSqlQuery query(db);
+    db_input ="CREATE TABLE position ("
+                "id SERIAL PRIMARY KEY,"
+                "name VARCHAR(100) NOT NULL,"
+                "permissions TEXT);";
+    if(!query.exec(db_input))
+        qDebug()<<"Ошибка создания таблицы: "<<query.lastError().text();
+}
+
+void Connection:: crTbAccessLevel()
+{
+    if(db.tables().contains("accessLevel"))
+    {
+        qDebug()<<"Таблица accessLevel уже существует";
+        return;
+    }
+    QSqlQuery query(db);
+    db_input = "CREATE TABLE accessLevel ("
+                "id SERIAL PRIMARY KEY,"
+                "level_name VARCHAR(50) NOT NULL,"
+                "permissions TEXT);";
+    if(!query.exec(db_input))
+        qDebug()<<"Ошибка создания таблицы: "<<query.lastError().text();
+}
+
+void Connection:: crTbPersonalData()
+{
+    if(db.tables().contains("personalData"))
+    {
+        qDebug()<<"Таблица personalData уже существует";
+        return;
+    }
+    QSqlQuery query(db);
+    db_input = "CREATE TABLE personalData ("
+               "id SERIAL PRIMARY KEY,"
+               "phone_number VARCHAR(15),"
+               "email VARCHAR(100),"
+               "address TEXT,"
+               "additional_notes TEXT);";
 
     if(!query.exec(db_input))
         qDebug()<<"Ошибка создания таблицы: "<<query.lastError().text();
+}
+
+void Connection:: alTable()
+{
+    QSqlQuery query(db);
+    db_input = "ALTER TABLE personalData ADD COLUMN employee_id INTEGER UNIQUE REFERENCES employees(id) ON DELETE CASCADE;";
+    if(!query.exec(db_input))
+        qDebug()<<"Ошибка добавления внешнего ключа: "<<query.lastError();
+
+    db_input = "ALTER TABLE employees ADD COLUMN personal_data_id INTEGER UNIQUE REFERENCES personalData(id);";
+    if(!query.exec(db_input))
+        qDebug()<<"Ошибка добавления внешнего ключа: "<<query.lastError();
+
 }
 
 bool Connection::autoUser(const QString& m_username, const QString& m_userpass)
