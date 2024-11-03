@@ -10,6 +10,7 @@ class Connection{
 private:
     QSqlDatabase db;
     QString db_input;
+    QSqlQuery query;
     bool m_loginSuccesfull;
     int userCounter;
 

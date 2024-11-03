@@ -49,7 +49,7 @@ void MainWindow::authorizeUser()
         this->show();
     }
     else
-        ui_auth.printInfo("Неверные данные");
+        ui_auth.printInfo("Пользователя с таким логином или паролем не существует");
 
 }
 void MainWindow::registerWindowShow()

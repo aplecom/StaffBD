@@ -56,7 +56,7 @@ QString auth_window:: getPass()
 void auth_window::printInfo(const QString& msg)
 {
     ui_Auth->infoLb->setText(msg);
-    timer->start(1000);
+    timer->start(1500);
 }
 
 void auth_window::resetInfo()

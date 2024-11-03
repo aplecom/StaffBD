@@ -1,7 +1,7 @@
 #include "connection.h"
 
 
-Connection::Connection()
+Connection::Connection(): query(QSqlQuery())
 {
     m_loginSuccesfull = false;
     userCounter = 0;
@@ -14,16 +14,20 @@ void Connection::createConneсtion()
     db.setPassword("");
     if(!db.open())
         qDebug()<<"Не удалось открыть БД "<<db.lastError().text();
+    else
+        query = QSqlQuery(db);
 }
 
 void Connection:: crTbEmployees()
 {
+
     if(db.tables().contains("employees"))
     {
         qDebug()<<"Таблица employees уже существует";
         return;
     }
-    QSqlQuery query(db);
+
+
     db_input = "CREATE TABLE employees ("
                "id SERIAL PRIMARY KEY,"
                "login VARCHAR(50) UNIQUE NOT NULL,"
@@ -43,7 +47,7 @@ void Connection:: crTbDepartment()
         qDebug()<<"Таблица department уже существует";
         return;
     }
-    QSqlQuery query(db);
+
     db_input ="CREATE TABLE department ("
                 "id SERIAL PRIMARY KEY,"
                 "name VARCHAR(100) NOT NULL );";
@@ -59,7 +63,7 @@ void Connection:: crTbPosition()
         qDebug()<<"Таблица position уже существует";
         return;
     }
-    QSqlQuery query(db);
+
     db_input ="CREATE TABLE position ("
                 "id SERIAL PRIMARY KEY,"
                 "name VARCHAR(100) NOT NULL,"
@@ -75,7 +79,7 @@ void Connection:: crTbAccessLevel()
         qDebug()<<"Таблица accessLevel уже существует";
         return;
     }
-    QSqlQuery query(db);
+
     db_input = "CREATE TABLE accessLevel ("
                 "id SERIAL PRIMARY KEY,"
                 "level_name VARCHAR(50) NOT NULL,"
@@ -91,7 +95,7 @@ void Connection:: crTbPersonalData()
         qDebug()<<"Таблица personalData уже существует";
         return;
     }
-    QSqlQuery query(db);
+
     db_input = "CREATE TABLE personalData ("
                "id SERIAL PRIMARY KEY,"
                "name VARCHAR(50),"
@@ -107,7 +111,7 @@ void Connection:: crTbPersonalData()
 
 void Connection:: alTable()
 {
-    QSqlQuery query(db);
+
     db_input = "ALTER TABLE personalData ADD COLUMN employee_id INTEGER UNIQUE REFERENCES employees(id) ON DELETE CASCADE;";
     if(!query.exec(db_input))
         qDebug()<<"Ошибка добавления внешнего ключа: "<<query.lastError();
@@ -120,7 +124,7 @@ void Connection:: alTable()
 
 bool Connection::autoUser(const QString& m_username, const QString& m_userpass)
 {
-    QSqlQuery query(db);
+
     QSqlRecord rec;
     QString str_t = "SELECT * FROM employees WHERE login = '%1'";
     QString username;
@@ -138,7 +142,7 @@ bool Connection::autoUser(const QString& m_username, const QString& m_userpass)
     rec = query.record(); // метаданные ( имена столбцов, индексы и типы данных)
     username = query.value(rec.indexOf("login")).toString();
     userpass = query.value(rec.indexOf("password")).toString();
-    if(m_username != username || m_userpass != userpass || m_username == "")
+    if(m_username != username || m_userpass != userpass)
     {
 
         qDebug() << "Данные неверны" << username << " " << userpass;
@@ -155,7 +159,6 @@ bool Connection::getLogS()
 
 bool Connection::regUser(const QString& m_username,const QString& m_userpass)
 {
-    QSqlQuery query(db);
     QSqlRecord rec;
     QString str_t = "SELECT * FROM employees WHERE login = '%1'";
     db_input = str_t.arg(m_username);
