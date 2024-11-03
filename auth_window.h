@@ -3,6 +3,10 @@
 
 #include <QWidget>
 #include <QTimer>
+#include <QPainter>
+#include <QPixmap>
+#include <QPalette>
+#include <QIcon>
 namespace Ui {
 class auth_window;
 }
@@ -35,6 +39,10 @@ private:
     QString m_username;
     QString m_userpass;
     QTimer* timer;
+    QPixmap pixmap;
+
+protected:
+    void paintEvent(QPaintEvent *event) override;
 
 };
 

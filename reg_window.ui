@@ -10,16 +10,28 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>230</y>
-     <width>551</width>
-     <height>204</height>
+     <x>200</x>
+     <y>160</y>
+     <width>411</width>
+     <height>248</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -27,63 +39,26 @@
      <enum>QLayout::SetDefaultConstraint</enum>
     </property>
     <item row="1" column="1">
-     <widget class="QLabel" name="reghLb">
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Plain</enum>
-      </property>
-      <property name="text">
-       <string>Регистрация пользователя</string>
-      </property>
-      <property name="textFormat">
-       <enum>Qt::AutoText</enum>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-      <property name="margin">
-       <number>0</number>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="QPushButton" name="backBtn">
-      <property name="text">
-       <string>Назад</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="1">
-     <widget class="QLineEdit" name="confirmLe">
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-      <property name="placeholderText">
-       <string>Повторить пароль</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1">
-     <widget class="QPushButton" name="registerBtn">
-      <property name="text">
-       <string>Регистрация</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QLineEdit" name="passLe">
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-      <property name="placeholderText">
-       <string>Пароль</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
      <widget class="QLineEdit" name="loginLe">
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+
+background-color: rgba(0, 0, 0, 0);
+border: 2px solid ;
+border-color: rgb(39, 89, 61);
+border-radius: 15px;
+padding: 10px;
+margin-bottom: 21px;
+font-size: 16px;
+font: 16pt &quot;DejaVu Math TeX Gyre&quot;;
+}
+
+QLineEdit:focus 
+{  border-color: rgba(155, 217, 144);
+}
+
+</string>
+      </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
@@ -92,7 +67,7 @@
       </property>
      </widget>
     </item>
-    <item row="7" column="1">
+    <item row="4" column="1">
      <widget class="QLabel" name="infoLb">
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
@@ -105,7 +80,161 @@
       </property>
      </widget>
     </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="confirmLe">
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+
+background-color: rgba(0, 0, 0, 0);
+border: 2px solid ;
+border-color: rgb(39, 89, 61);
+border-radius: 15px;
+padding: 10px;
+margin-bottom: 21px;
+font-size: 16px;
+font: 16pt &quot;DejaVu Math TeX Gyre&quot;;
+}
+
+QLineEdit:focus 
+{  border-color: rgba(155, 217, 144);
+}
+
+</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="placeholderText">
+       <string>Повторить пароль</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="passLe">
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+
+background-color: rgba(0, 0, 0, 0);
+border: 2px solid ;
+border-color: rgb(39, 89, 61);
+border-radius: 15px;
+padding: 10px;
+margin-bottom: 21px;
+font-size: 16px;
+font: 16pt &quot;DejaVu Math TeX Gyre&quot;;
+}
+
+QLineEdit:focus 
+{  border-color: rgba(155, 217, 144);
+}
+
+</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="placeholderText">
+       <string>Пароль</string>
+      </property>
+     </widget>
+    </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="registerBtn">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>410</y>
+     <width>141</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background: rgba(32, 255, 144, 15);
+	color: white;
+    border-radius: 15px; 
+	border: 2px solid transparent;
+}
+
+QPushButton:hover 
+{   background: rgba(32, 255, 144, 30);;
+	border-color: rgba(155, 217, 144);
+}
+
+QPushButton:pressed 
+{   background: rgba(32, 255, 144, 60);;
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Регистрация</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="backBtn">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>410</y>
+     <width>141</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background: rgba(32, 255, 144, 15);
+	color: white;
+    border-radius: 15px; 
+	border: 2px solid transparent;
+}
+
+QPushButton:hover 
+{   background: rgba(32, 255, 144, 30);;
+	border-color: rgba(155, 217, 144);
+}
+
+QPushButton:pressed 
+{   background: rgba(32, 255, 144, 60);;
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Назад</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="reghLb">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>90</y>
+     <width>549</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 900 25pt &quot;Noto Sans Adlam Unjoined&quot;;
+font-size:  20px;
+
+</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="text">
+    <string>Регистрация пользователя</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::AutoText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="margin">
+    <number>0</number>
+   </property>
   </widget>
  </widget>
  <resources/>

@@ -3,7 +3,10 @@
 
 #include <QWidget>
 #include <QTimer>
-
+#include <QPainter>
+#include <QPixmap>
+#include <QPalette>
+#include <QIcon>
 namespace Ui {
 class reg_window;
 }
@@ -38,6 +41,10 @@ private:
     QString m_userPass;
     QString m_confirm;
     QTimer* timer;
+    QPixmap pixmap;
+
+protected:
+    void paintEvent(QPaintEvent *event) override;
 };
 
 #endif // REG_WINDOW_H

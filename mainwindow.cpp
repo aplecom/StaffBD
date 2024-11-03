@@ -13,15 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&ui_reg,SIGNAL(destroyed()),this,SLOT(show()));
     connect(&ui_reg,SIGNAL(back_button_clicked()),this,SLOT(backWindowAuth()));
 
-    connection.createConneсtion();
-    connection.crTbAccessLevel();
-    connection.crTbDepartment();
-    connection.crTbPosition();
-    connection.crTbPersonalData();
-    connection.crTbEmployees();
-    connection.alTable();
-    connection.fstInsTable();
-
+    setupDB();
     model = new QSqlTableModel;
     model->setTable("employees");
     ui_Main->setupUi(this);
@@ -30,6 +22,18 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui_Main;
+}
+
+void MainWindow:: setupDB()
+{
+    connection.createConneсtion();
+    connection.crTbAccessLevel();
+    connection.crTbDepartment();
+    connection.crTbPosition();
+    connection.crTbPersonalData();
+    connection.crTbEmployees();
+    connection.alTable();
+    connection.fstInsTable();
 }
 
 void MainWindow::authorizeUser()

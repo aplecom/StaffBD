@@ -5,11 +5,14 @@ auth_window::auth_window(QWidget *parent)
     : QWidget(parent)
     , ui_Auth(new Ui::auth_window)
 {
+    setWindowIcon(QIcon(":/resource/img/icon.png"));
+
     timer = new QTimer(this);
     timer->setSingleShot(true);
-
     connect(timer, &QTimer::timeout, this, &auth_window::resetInfo);
-    //QObject::connect(timer, SIGNAL(timeout()), this, SLOT(resetInfo())); //почему не работает ???
+
+    pixmap.load(":/resource/img/background.jpg");
+    this->setWindowIcon(QIcon(":/resource/img/icon.png")); // не работает
 
     ui_Auth->setupUi(this);
 }
@@ -64,3 +67,11 @@ void auth_window::resetInfo()
     ui_Auth->infoLb->setText("");
 }
 
+void auth_window::paintEvent(QPaintEvent *event) {
+    Q_UNUSED(event);
+
+    QPainter painter(this);
+    QSize windowSize = size();
+
+    painter.drawPixmap(0, 0, windowSize.width(), windowSize.height(), pixmap);
+}

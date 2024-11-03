@@ -5,6 +5,9 @@ reg_window::reg_window(QWidget *parent)
     : QWidget(parent)
     , ui_Reg(new Ui::reg_window)
 {
+
+    pixmap.load(":/resource/img/background.jpg");
+
     timer = new QTimer(this);
     timer->setSingleShot(true);
 
@@ -69,4 +72,13 @@ void reg_window::printInfo(const QString& msg)
 void reg_window::resetInfo()
 {
     ui_Reg->infoLb->setText("");
+}
+
+void reg_window::paintEvent(QPaintEvent *event) {
+    Q_UNUSED(event);
+
+    QPainter painter(this);
+    QSize windowSize = size();
+
+    painter.drawPixmap(0, 0, windowSize.width(), windowSize.height(), pixmap);
 }

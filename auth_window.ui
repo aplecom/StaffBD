@@ -10,15 +10,30 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Авторизация</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>210</y>
-     <width>531</width>
+     <x>200</x>
+     <y>230</y>
+     <width>421</width>
      <height>172</height>
     </rect>
    </property>
@@ -26,15 +41,27 @@
     <property name="sizeConstraint">
      <enum>QLayout::SetDefaultConstraint</enum>
     </property>
-    <item row="4" column="1">
-     <widget class="QPushButton" name="loginBtn">
-      <property name="text">
-       <string>Войти</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
+    <item row="0" column="1">
      <widget class="QLineEdit" name="loginLe">
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+
+background-color: rgba(0, 0, 0, 0);
+border: 2px solid ;
+border-color: rgb(39, 89, 61);
+border-radius: 15px;
+padding: 10px;
+margin-bottom: 21px;
+font-size: 16px;
+font: 16pt &quot;DejaVu Math TeX Gyre&quot;;
+}
+
+QLineEdit:focus 
+{  border-color: rgba(155, 217, 144);
+}
+
+</string>
+      </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
@@ -43,8 +70,27 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="1">
+    <item row="1" column="1">
      <widget class="QLineEdit" name="passLe">
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+
+background-color: rgba(0, 0, 0, 0);
+border: 2px solid ;
+border-color: rgb(39, 89, 61);
+border-radius: 15px;
+padding: 10px;
+margin-bottom: 21px;
+font-size: 16px;
+font: 16pt &quot;DejaVu Math TeX Gyre&quot;;
+}
+
+QLineEdit:focus 
+{  border-color: rgba(155, 217, 144);
+}
+
+</string>
+      </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
@@ -53,36 +99,7 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="1" rowspan="2">
-     <widget class="QLabel" name="authLb">
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Plain</enum>
-      </property>
-      <property name="text">
-       <string>Авторизация пользователя</string>
-      </property>
-      <property name="textFormat">
-       <enum>Qt::AutoText</enum>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-      <property name="margin">
-       <number>0</number>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1">
-     <widget class="QPushButton" name="registerBtn">
-      <property name="text">
-       <string>Регистрация</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
+    <item row="2" column="1">
      <widget class="QLabel" name="infoLb">
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
@@ -91,11 +108,107 @@
        <string/>
       </property>
       <property name="alignment">
-       <set>Qt::AlignCenter</set>
+       <set>Qt::AlignBottom|Qt::AlignHCenter</set>
       </property>
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="loginBtn">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>410</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background: rgba(32, 255, 144, 15);
+	color: white;
+    border-radius: 15px; 
+	border: 2px solid transparent;
+}
+
+QPushButton:hover 
+{   background: rgba(32, 255, 144, 30);
+	border-color: rgba(155, 217, 144);
+}
+
+QPushButton:pressed 
+{   background: rgba(32, 255, 144, 60);
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Войти</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="registerBtn">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>410</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background: rgba(32, 255, 144, 15);
+	color: white;
+    border-radius: 15px; 
+	border: 2px solid transparent;
+}
+
+QPushButton:hover 
+{   background: rgba(32, 255, 144, 30);
+	border-color: rgba(155, 217, 144);
+}
+
+QPushButton:pressed 
+{   background: rgba(32, 255, 144, 60);
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Регистрация</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="authLb">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>130</y>
+     <width>529</width>
+     <height>67</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 900 25pt &quot;Noto Sans Adlam Unjoined&quot;;
+font-size:  20px;
+
+</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="text">
+    <string>Авторизация пользователя</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::AutoText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="margin">
+    <number>0</number>
+   </property>
   </widget>
  </widget>
  <resources/>

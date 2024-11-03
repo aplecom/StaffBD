@@ -25,6 +25,8 @@ public:
     ~MainWindow();
     void display();
     void printTable();
+    void setupDB();
+
 
 private:
     Ui::MainWindow *ui_Main;
