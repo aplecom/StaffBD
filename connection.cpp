@@ -27,7 +27,6 @@ void Connection:: crTbEmployees()
         return;
     }
 
-
     db_input = "CREATE TABLE employees ("
                "id SERIAL PRIMARY KEY,"
                "login VARCHAR(50) UNIQUE NOT NULL,"
@@ -114,12 +113,52 @@ void Connection:: alTable()
 
     db_input = "ALTER TABLE personalData ADD COLUMN employee_id INTEGER UNIQUE REFERENCES employees(id) ON DELETE CASCADE;";
     if(!query.exec(db_input))
-        qDebug()<<"Ошибка добавления внешнего ключа: "<<query.lastError();
+        qDebug()<<"Ошибка добавления внешнего ключа: "<<query.lastError().text();
 
     db_input = "ALTER TABLE employees ADD COLUMN personal_data_id INTEGER UNIQUE REFERENCES personalData(id);";
     if(!query.exec(db_input))
-        qDebug()<<"Ошибка добавления внешнего ключа: "<<query.lastError();
+        qDebug()<<"Ошибка добавления внешнего ключа: "<<query.lastError().text();
+}
 
+void Connection:: fstInsTable()
+{
+    // accessLevel
+    db_input = "INSERT INTO accessLevel (id,level_name,permissions) VALUES(1,'Полный доступ','Может исправлять абсолютно все для"
+               " каждого сотрудника любого департамента');";
+    if(!query.exec(db_input))
+        qDebug()<<"Ошибка добавления уровня доступа - Полный доступ"<<query.lastError().text();
+    db_input = "INSERT INTO accessLevel (id,level_name,permissions) VALUES(2,'Доступ департамента','Может исправлять информацию для"
+               " каждого сотрудника его департамента');";
+    if(!query.exec(db_input))
+        qDebug()<<"Ошибка добавления уровня доступа - Доступ департамента"<<query.lastError().text();
+    db_input = "INSERT INTO accessLevel (id,level_name,permissions) VALUES(3,'Начальный доступ','Может исправлять только свою информацию');";
+    if(!query.exec(db_input))
+        qDebug()<<"Ошибка добавления уровня доступа - Начальный доступ"<<query.lastError().text();
+
+    // position
+    db_input = "INSERT INTO position (id,name,permissions) VALUES(1,'Администратор','Управляет всеми отделами');";
+    if(!query.exec(db_input))
+        qDebug()<<"Ошибка добавления должности - Администратор"<<query.lastError().text();
+    db_input = "INSERT INTO position (id,name,permissions) VALUES(2,'Главный инженер','Управляет своим отделом');";
+    if(!query.exec(db_input))
+        qDebug()<<"Ошибка добавления должности - Главный инженер"<<query.lastError().text();
+    db_input = "INSERT INTO position (id,name,permissions) VALUES(3,'Инженер','Управляет только своими данными');";
+    if(!query.exec(db_input))
+        qDebug()<<"Ошибка добавления должности - Инженер"<<query.lastError().text();
+
+    // department
+    db_input = "INSERT INTO department (id,name) VALUES(1,'Control');";
+    if(!query.exec(db_input))
+        qDebug()<<"Ошибка добавления департамента - Control"<<query.lastError().text();
+    db_input = "INSERT INTO department (id,name) VALUES(2,'Back-end');";
+    if(!query.exec(db_input))
+        qDebug()<<"Ошибка добавления департамента - Back-end"<<query.lastError().text();
+    db_input = "INSERT INTO department (id,name) VALUES(3,'Front-end');";
+    if(!query.exec(db_input))
+        qDebug()<<"Ошибка добавления департамента - Front-end"<<query.lastError().text();
+    db_input = "INSERT INTO department (id,name) VALUES(4,'QA');";
+    if(!query.exec(db_input))
+        qDebug()<<"Ошибка добавления департамента - QA"<<query.lastError().text();
 }
 
 bool Connection::autoUser(const QString& m_username, const QString& m_userpass)
@@ -182,9 +221,8 @@ bool Connection::regUser(const QString& m_username,const QString& m_userpass)
     else {
         query.next();
         rec = query.record();
-        userCounter = query.value(0).toInt();
+        userCounter = query.value(0).toInt() + 1;
     }
-    userCounter++;
     query.prepare("INSERT INTO employees (id, login, password) VALUES (?, ?, ?);");
     query.addBindValue(userCounter);
     query.addBindValue(m_username);

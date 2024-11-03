@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     connection.crTbPersonalData();
     connection.crTbEmployees();
     connection.alTable();
+    connection.fstInsTable();
 
     model = new QSqlTableModel;
     model->setTable("employees");
