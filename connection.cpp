@@ -145,6 +145,10 @@ void Connection:: fstInsTable()
     db_input = "INSERT INTO position (id,name,permissions) VALUES(3,'Инженер','Управляет только своими данными');";
     if(!query.exec(db_input))
         qDebug()<<"Ошибка добавления должности - Инженер"<<query.lastError().text();
+    db_input = "INSERT INTO position (id,name,permissions) VALUES(4,'Стажер','Управляет только своими данными');";
+    if(!query.exec(db_input))
+        qDebug()<<"Ошибка добавления должности - Стажер"<<query.lastError().text();
+
 
     // department
     db_input = "INSERT INTO department (id,name) VALUES(1,'Control');";
@@ -223,14 +227,39 @@ bool Connection::regUser(const QString& m_username,const QString& m_userpass)
         rec = query.record();
         userCounter = query.value(0).toInt() + 1;
     }
-    query.prepare("INSERT INTO employees (id, login, password) VALUES (?, ?, ?);");
-    query.addBindValue(userCounter);
-    query.addBindValue(m_username);
-    query.addBindValue(m_userpass);
-    if(!query.exec())
+
+    // добавляем информацию пользователя в personaldata
+    str_t ="INSERT INTO personaldata (id) VALUES ('%1');";
+    db_input = str_t.arg(userCounter);
+    if(!query.exec(db_input))
     {
-        qDebug() << "Не удалось добавить данные в БД"  << query.lastError().text() << " : " << query.lastQuery();
+        qDebug()<<"Ошибка запроса"<<query.lastError().text()<<" : "<<query.lastQuery();
         return false;
     }
+
+    // добавляем пользователя в employees
+    query.prepare("INSERT INTO employees (id, login, password,personal_data_id, position_id,"
+                  "access_id) VALUES (?, ?, ?, ?, ?, ? );");
+    query.addBindValue(userCounter); // id
+    query.addBindValue(m_username); // login
+    query.addBindValue(m_userpass); // password
+    query.addBindValue(userCounter); // personal_data_id = id
+    query.addBindValue(4); // position_id - стажер
+    query.addBindValue(3); // access_id - начальный
+    if(!query.exec())
+    {
+        qDebug() << "Не удалось добавить пользователя" << query.lastError().text() << " : " << query.lastQuery();
+        return false;
+    }
+
+    // обновляем employee_id в personaldata для связи с employees
+    str_t = "UPDATE personaldata SET employee_id = '%1' WHERE id = '%1'; ";
+    db_input = str_t.arg(userCounter);
+    if(!query.exec(db_input))
+    {
+        qDebug()<<"Ошибка запроса"<<query.lastError().text()<<" : "<<query.lastQuery();
+        return false;
+    }
+
     return true;
 }
