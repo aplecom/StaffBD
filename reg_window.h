@@ -23,6 +23,7 @@ public:
     bool checkPass();
     void printInfo(const QString& msg);
     void resetInfo();
+    void resetFields();
 
 signals:
     void register_button_clicked();

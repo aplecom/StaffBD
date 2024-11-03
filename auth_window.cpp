@@ -75,3 +75,11 @@ void auth_window::paintEvent(QPaintEvent *event) {
 
     painter.drawPixmap(0, 0, windowSize.width(), windowSize.height(), pixmap);
 }
+
+void auth_window::resetFields()
+{
+    ui_Auth->loginLe->textEdited("");
+    ui_Auth->passLe->textEdited("");
+    ui_Auth->loginLe->setText("");
+    ui_Auth->passLe->setText("");
+}

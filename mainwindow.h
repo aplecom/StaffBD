@@ -26,6 +26,7 @@ public:
     void display();
     void printTable();
     void setupDB();
+    void resetFields();
 
 
 private:

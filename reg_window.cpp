@@ -82,3 +82,13 @@ void reg_window::paintEvent(QPaintEvent *event) {
 
     painter.drawPixmap(0, 0, windowSize.width(), windowSize.height(), pixmap);
 }
+
+void reg_window::resetFields()
+{
+    ui_Reg->loginLe->textEdited("");
+    ui_Reg->passLe->textEdited("");
+    ui_Reg->confirmLe->textEdited("");
+    ui_Reg->loginLe->setText("");
+    ui_Reg->passLe->setText("");
+    ui_Reg->confirmLe->setText("");
+}

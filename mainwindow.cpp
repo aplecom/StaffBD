@@ -42,7 +42,6 @@ void MainWindow::authorizeUser()
     m_userpass = ui_auth.getPass();
     if ( m_username=="" || m_userpass=="")
     {
-
          ui_auth.printInfo("Заполните поля");
     }
 
@@ -73,6 +72,7 @@ void MainWindow::registerUser()
     {
         if(connection.regUser(m_username,m_userpass))
         {
+            resetFields();
             ui_reg.close();
             ui_auth.show();
         }
@@ -93,6 +93,7 @@ void MainWindow::display()
 
 void MainWindow::backWindowAuth()
 {
+    resetFields();
     ui_reg.close();
     ui_auth.show();
 }
@@ -110,3 +111,8 @@ void MainWindow::on_backBtn_clicked()
     ui_auth.show();
 }
 
+void MainWindow::resetFields()
+{
+    ui_auth.resetFields();
+    ui_reg.resetFields();
+}

@@ -22,6 +22,7 @@ public:
     QString getPass();
     void printInfo(const QString& msg);
     void resetInfo();
+    void resetFields();
 
 signals:
     void login_button_clicked();
