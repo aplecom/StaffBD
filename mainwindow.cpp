@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&ui_reg,SIGNAL(destroyed()),this,SLOT(show()));
     connect(&ui_reg,SIGNAL(back_button_clicked()),this,SLOT(backWindowAuth()));
 
+    pixmap.load(":/resource/img/background.jpg");
+
     setupDB();
     model = new QSqlTableModel;
     model->setTable("employees");
@@ -49,6 +51,7 @@ void MainWindow::authorizeUser()
     {
         ui_auth.close();
         ui_reg.close();
+        setAccPage();
         printTable();
         this->show();
     }
@@ -115,4 +118,19 @@ void MainWindow::resetFields()
 {
     ui_auth.resetFields();
     ui_reg.resetFields();
+}
+
+void MainWindow::paintEvent(QPaintEvent *event) {
+    Q_UNUSED(event);
+
+    QPainter painter(this);
+    QSize windowSize = size();
+
+    painter.drawPixmap(0, 0, windowSize.width(), windowSize.height(), pixmap);
+}
+
+void MainWindow:: setAccPage()
+{
+    int page = connection.userAccess(m_username) - 1;
+    ui_Main->stackedWidget->setCurrentIndex(page);
 }

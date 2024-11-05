@@ -7,7 +7,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    a.setWindowIcon(QIcon(":/resource/img/icon.png"));
+    a.setWindowIcon(QIcon(":/resource/img/icon.png")); // не работает
     MainWindow w;
     w.display();
     return a.exec();

@@ -263,3 +263,27 @@ bool Connection::regUser(const QString& m_username,const QString& m_userpass)
 
     return true;
 }
+
+
+int Connection:: userAccess(QString& m_username)
+{
+    QString str_t;
+    str_t = "SELECT access_id FROM employees WHERE login = '%1'";
+    db_input = str_t.arg(m_username);
+    query.exec(m_username);
+    if(!query.exec(db_input))
+    {
+        qDebug()<<"Ошибка получение уровня доступа"<<query.lastError().text();
+        return -1;
+    }
+    if(query.next())
+    {
+        int access_id = query.value(0).toInt();
+        return access_id;
+    }
+    else
+    {
+        qDebug()<<"Пользователь "<<m_username<<"не найден";
+        return -1;
+    }
+}

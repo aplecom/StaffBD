@@ -25,8 +25,9 @@ public:
     ~MainWindow();
     void display();
     void printTable();
-    void setupDB();
+
     void resetFields();
+    void  setAccPage();
 
 
 private:
@@ -40,6 +41,8 @@ private:
     Connection connection;
     QSqlTableModel *model;
 
+    QPixmap pixmap;
+    void setupDB();
 
 private slots:
     void authorizeUser();
@@ -47,5 +50,8 @@ private slots:
     void registerUser();
     void backWindowAuth();
     void on_backBtn_clicked();
+
+protected:
+    void paintEvent(QPaintEvent *event) override;
 };
 #endif // MAINWINDOW_H

@@ -5,14 +5,11 @@ auth_window::auth_window(QWidget *parent)
     : QWidget(parent)
     , ui_Auth(new Ui::auth_window)
 {
-    setWindowIcon(QIcon(":/resource/img/icon.png"));
-
     timer = new QTimer(this);
     timer->setSingleShot(true);
     connect(timer, &QTimer::timeout, this, &auth_window::resetInfo);
 
     pixmap.load(":/resource/img/background.jpg");
-    this->setWindowIcon(QIcon(":/resource/img/icon.png")); // не работает
 
     ui_Auth->setupUi(this);
 }
