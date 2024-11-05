@@ -2,5 +2,6 @@
     <qresource prefix="/resource">
         <file>img/background.jpg</file>
         <file>img/icon.png</file>
+        <file>img/background2.jpg</file>
     </qresource>
 </RCC>

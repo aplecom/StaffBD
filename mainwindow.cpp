@@ -133,4 +133,5 @@ void MainWindow:: setAccPage()
 {
     int page = connection.userAccess(m_username) - 1;
     ui_Main->stackedWidget->setCurrentIndex(page);
+    pixmap.load(":/resource/img/background2.jpg");
 }
