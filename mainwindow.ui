@@ -29,14 +29,14 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
+      <x>-340</x>
+      <y>-10</y>
       <width>1920</width>
       <height>1080</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QPushButton" name="backBtn">
@@ -142,9 +142,9 @@ QPushButton:pressed
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>490</x>
-        <y>60</y>
-        <width>291</width>
+        <x>940</x>
+        <y>20</y>
+        <width>290</width>
         <height>91</height>
        </rect>
       </property>
@@ -160,6 +160,16 @@ QPushButton:pressed
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QListView" name="listView">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>800</width>
+        <height>1080</height>
+       </rect>
       </property>
      </widget>
     </widget>

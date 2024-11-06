@@ -276,7 +276,7 @@ int Connection:: userAccess(QString& m_username)
         qDebug()<<"Ошибка получение уровня доступа"<<query.lastError().text();
         return -1;
     }
-    if(query.next())
+    else if(query.next())
     {
         int access_id = query.value(0).toInt();
         return access_id;
