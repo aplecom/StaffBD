@@ -5,6 +5,8 @@
 #include <QtDebug>
 #include <QString>
 #include <QSqlTableModel>
+#include <QStringListModel>
+#include<QStringList>
 
 #include "auth_window.h"
 #include "reg_window.h"
@@ -29,6 +31,8 @@ public:
     void resetFields();
     void  setAccPage();
 
+    void printList();
+
 
 private:
     Ui::MainWindow *ui_Main;
@@ -39,7 +43,10 @@ private:
     QString m_userpass;
 
     Connection connection;
-    QSqlTableModel *model;
+    QSqlTableModel *modelTable;
+
+    QStringListModel* modelList;
+    QStringList employees;
 
     QPixmap pixmap;
     void setupDB();

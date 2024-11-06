@@ -5,6 +5,7 @@
 #include <QtSql>
 #include <QSqlDatabase>
 #include <QString>
+#include <QStringList>
 
 class Connection{
 private:
@@ -28,6 +29,7 @@ public:
     bool regUser(const QString& m_username,const QString& m_userpass);
     bool getLogS();
     int userAccess(QString& m_username);
+    void userData(QStringList& employees);
 
 };
 

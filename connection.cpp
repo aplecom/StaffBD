@@ -239,13 +239,14 @@ bool Connection::regUser(const QString& m_username,const QString& m_userpass)
 
     // добавляем пользователя в employees
     query.prepare("INSERT INTO employees (id, login, password,personal_data_id, position_id,"
-                  "access_id) VALUES (?, ?, ?, ?, ?, ? );");
+                  "access_id, department_id) VALUES (?, ?, ?, ?, ?, ?, ?);");
     query.addBindValue(userCounter); // id
     query.addBindValue(m_username); // login
     query.addBindValue(m_userpass); // password
     query.addBindValue(userCounter); // personal_data_id = id
     query.addBindValue(4); // position_id - стажер
     query.addBindValue(3); // access_id - начальный
+    query.addBindValue(2); // department_id - back-end
     if(!query.exec())
     {
         qDebug() << "Не удалось добавить пользователя" << query.lastError().text() << " : " << query.lastQuery();
@@ -287,3 +288,37 @@ int Connection:: userAccess(QString& m_username)
         return -1;
     }
 }
+
+void Connection:: userData(QStringList& employees)
+{
+    QString str_t;
+    int count = 0;
+    str_t = "SELECT COUNT(*) FROM employees WHERE department_id = 2";
+    db_input = str_t;
+
+    if(!query.exec(db_input))
+    {
+        qDebug()<<"Ошибка получение количпества участников департамента"<<query.lastError().text();
+    }
+    else if(query.next())
+    {
+        count = query.value(0).toInt();
+    }
+    else
+    {
+         qDebug()<<"Пользователей департамента не найдено";
+    }
+
+    str_t = "SELECT login FROM employees WHERE department_id = 2";
+    if (!query.exec(str_t)) {
+        qDebug() << "Ошибка выполнения запроса на логины сотрудников:" << query.lastError().text();
+    } else {
+        while (query.next() && count > 0) {
+            employees << query.value(0).toString();
+            count--;
+        }        }
+
+}
+
+
+

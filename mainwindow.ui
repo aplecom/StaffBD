@@ -29,8 +29,8 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>-340</x>
-      <y>-10</y>
+      <x>0</x>
+      <y>0</y>
       <width>1920</width>
       <height>1080</height>
      </rect>
@@ -139,11 +139,11 @@ QPushButton:pressed
      </widget>
     </widget>
     <widget class="QWidget" name="page_2">
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="header">
       <property name="geometry">
        <rect>
-        <x>940</x>
-        <y>20</y>
+        <x>1320</x>
+        <y>30</y>
         <width>290</width>
         <height>91</height>
        </rect>
@@ -170,6 +170,123 @@ QPushButton:pressed
         <width>800</width>
         <height>1080</height>
        </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="loginLb">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>190</y>
+        <width>141</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Пользователь &lt;login&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="nameLb">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>250</y>
+        <width>58</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;Имя&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="surnameLb">
+      <property name="geometry">
+       <rect>
+        <x>890</x>
+        <y>250</y>
+        <width>81</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;Фамилия&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="surnameLb_2">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>290</y>
+        <width>241</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Номер телефона: &lt;номер телефона&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="emailLb">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>340</y>
+        <width>121</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Почта: &lt;почта&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="emailLb_2">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>390</y>
+        <width>191</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Место проживания: &lt;адрес&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>460</y>
+        <width>261</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt; тут будет доп инфа&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="departmntLb">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>120</y>
+        <width>101</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;департамент&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="positionLb">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>150</y>
+        <width>101</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;должность&gt;</string>
       </property>
      </widget>
     </widget>

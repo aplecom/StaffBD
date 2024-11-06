@@ -16,8 +16,13 @@ MainWindow::MainWindow(QWidget *parent)
     pixmap.load(":/resource/img/background.jpg");
 
     setupDB();
-    model = new QSqlTableModel;
-    model->setTable("employees");
+
+    // может раскинуть по методам этот блок
+    modelTable = new QSqlTableModel;
+    modelList = new QStringListModel;
+
+    // может раскинуть по методам этот блок
+
     ui_Main->setupUi(this);
 }
 
@@ -52,7 +57,6 @@ void MainWindow::authorizeUser()
         ui_auth.close();
         ui_reg.close();
         setAccPage();
-        printTable();
         this->show();
     }
     else
@@ -103,9 +107,10 @@ void MainWindow::backWindowAuth()
 
 void MainWindow::printTable(){
 
-    model->select();
-    model->sort(0,Qt::AscendingOrder);
-    ui_Main->tableView->setModel(model);
+    modelTable->setTable("employees");
+    //modelTable->select();
+    modelTable->sort(0,Qt::AscendingOrder);
+    ui_Main->tableView->setModel(modelTable);
 }
 
 void MainWindow::on_backBtn_clicked()
@@ -134,4 +139,24 @@ void MainWindow:: setAccPage()
     int page = connection.userAccess(m_username) - 1;
     ui_Main->stackedWidget->setCurrentIndex(page);
     pixmap.load(":/resource/img/background2.jpg");
+
+    switch(page)
+    {
+        case 0:
+            printTable();
+            break;
+        case 1:
+            printList();
+            break;
+    }
+
+
+}
+
+void MainWindow:: printList()
+{
+    connection.userData(employees);
+    employees.append("Аргумент"); // тут будет функция по где будут подгружать всех сотрудников
+    modelList->setStringList(employees);
+    ui_Main->listView->setModel(modelList);
 }
