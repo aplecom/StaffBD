@@ -298,7 +298,7 @@ void Connection:: userData(QStringList& employees)
 
     if(!query.exec(db_input))
     {
-        qDebug()<<"Ошибка получение количпества участников департамента"<<query.lastError().text();
+        qDebug()<<"Ошибка получение количества участников департамента"<<query.lastError().text();
     }
     else if(query.next())
     {
@@ -319,6 +319,33 @@ void Connection:: userData(QStringList& employees)
         }        }
 
 }
+
+void Connection::printPersData(QString& login,QStringList& persData)
+{
+    QSqlRecord rec;
+    QString str_t = "SELECT personal_data_id FROM employees WHERE login = '%1'";
+    db_input = str_t.arg(login);
+    if (!query.exec(db_input) || !query.next()) {
+        qDebug() << "Ошибка получения personal_data_id: " << query.lastError().text();
+        return;
+    }
+    int personalDataId = query.value(0).toInt();
+    str_t = "SELECT * FROM personalData WHERE id = '%1'";
+    db_input = str_t.arg(personalDataId);
+
+    if (!query.exec(db_input) || !query.next()) {
+        qDebug() << "Ошибка получения данных пользователя: " << query.lastError().text();
+        return;
+    }
+    rec = query.record();
+    persData << query.value(rec.indexOf("name")).toString()
+             << query.value(rec.indexOf("surname")).toString()
+             << query.value(rec.indexOf("phone_number")).toString()
+             << query.value(rec.indexOf("email")).toString()
+             << query.value(rec.indexOf("address")).toString()
+             << query.value(rec.indexOf("additional_information")).toString();
+}
+
 
 
 

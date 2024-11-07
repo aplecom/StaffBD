@@ -72,6 +72,9 @@ QLineEdit:focus
     </item>
     <item row="1" column="1">
      <widget class="QLineEdit" name="passLe">
+      <property name="focusPolicy">
+       <enum>Qt::StrongFocus</enum>
+      </property>
       <property name="styleSheet">
        <string notr="true">QLineEdit {
 
@@ -90,6 +93,9 @@ QLineEdit:focus
 }
 
 </string>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>

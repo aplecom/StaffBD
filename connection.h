@@ -30,6 +30,8 @@ public:
     bool getLogS();
     int userAccess(QString& m_username);
     void userData(QStringList& employees);
+    void printPersData(QString& login,QStringList& persData);
+
 
 };
 

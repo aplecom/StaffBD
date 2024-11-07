@@ -156,7 +156,24 @@ void MainWindow:: setAccPage()
 void MainWindow:: printList()
 {
     connection.userData(employees);
-    employees.append("Аргумент"); // тут будет функция по где будут подгружать всех сотрудников
     modelList->setStringList(employees);
     ui_Main->listView->setModel(modelList);
+}
+
+
+
+void MainWindow::on_listView_pressed(const QModelIndex &index)
+{
+    QStringList persData;
+
+    // Логин ( можно потом вытащить из списка информации )
+    QString login = "Логин: " + index.data(Qt::DisplayRole).toString();
+    ui_Main->loginLb->setText(login);
+  connection.printPersData(login,persData);
+    QString name = "Имя" + persData[0];
+
+
+
+    ui_Main->nameLb->setText(name);
+
 }

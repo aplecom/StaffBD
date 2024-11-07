@@ -58,6 +58,9 @@ private slots:
     void backWindowAuth();
     void on_backBtn_clicked();
 
+
+    void on_listView_pressed(const QModelIndex &index);
+
 protected:
     void paintEvent(QPaintEvent *event) override;
 };
