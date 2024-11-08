@@ -167,13 +167,24 @@ void MainWindow::on_listView_pressed(const QModelIndex &index)
     QStringList persData;
 
     // Логин ( можно потом вытащить из списка информации )
-    QString login = "Логин: " + index.data(Qt::DisplayRole).toString();
-    ui_Main->loginLb->setText(login);
-  connection.printPersData(login,persData);
-    QString name = "Имя" + persData[0];
+    QString login = index.data(Qt::DisplayRole).toString();
+    ui_Main->loginLb->setText("Логин: " + login);
 
 
+    connection.printPersData(login,persData);
+    QString name = persData[0];
+    QString surname =  persData[1];
+    QString phone_number =  persData[2];
+    QString email =  persData[3];
+    QString address =  persData[4];
+    QString additional_information =  persData[5];
 
-    ui_Main->nameLb->setText(name);
+    ui_Main->nameLb->setText("Имя: " + name);
+    ui_Main->surnameLb->setText("Фамилия: "  + surname);
+    ui_Main->numberLb->setText("Номер телефона: " + phone_number);
+    ui_Main->emailLb->setText("Почта: " + email);
+    ui_Main->addressLb->setText("Адрес: " + address);
+    ui_Main->infoLb->setText("Дополнительная иформация: " + additional_information);
+
 
 }

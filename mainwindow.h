@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QtDebug>
+#include <QDebug>
 #include <QString>
 #include <QSqlTableModel>
 #include <QStringListModel>

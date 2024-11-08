@@ -190,7 +190,7 @@ QPushButton:pressed
        <rect>
         <x>830</x>
         <y>250</y>
-        <width>58</width>
+        <width>71</width>
         <height>18</height>
        </rect>
       </property>
@@ -201,9 +201,9 @@ QPushButton:pressed
      <widget class="QLabel" name="surnameLb">
       <property name="geometry">
        <rect>
-        <x>890</x>
+        <x>920</x>
         <y>250</y>
-        <width>81</width>
+        <width>201</width>
         <height>18</height>
        </rect>
       </property>
@@ -211,12 +211,12 @@ QPushButton:pressed
        <string>&lt;Фамилия&gt;</string>
       </property>
      </widget>
-     <widget class="QLabel" name="surnameLb_2">
+     <widget class="QLabel" name="numberLb">
       <property name="geometry">
        <rect>
         <x>830</x>
         <y>290</y>
-        <width>241</width>
+        <width>301</width>
         <height>18</height>
        </rect>
       </property>
@@ -229,7 +229,7 @@ QPushButton:pressed
        <rect>
         <x>830</x>
         <y>340</y>
-        <width>121</width>
+        <width>231</width>
         <height>18</height>
        </rect>
       </property>
@@ -237,12 +237,12 @@ QPushButton:pressed
        <string>Почта: &lt;почта&gt;</string>
       </property>
      </widget>
-     <widget class="QLabel" name="emailLb_2">
+     <widget class="QLabel" name="addressLb">
       <property name="geometry">
        <rect>
         <x>830</x>
         <y>390</y>
-        <width>191</width>
+        <width>291</width>
         <height>18</height>
        </rect>
       </property>
@@ -250,13 +250,13 @@ QPushButton:pressed
        <string>Место проживания: &lt;адрес&gt;</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="infoLb">
       <property name="geometry">
        <rect>
         <x>820</x>
         <y>460</y>
-        <width>261</width>
-        <height>81</height>
+        <width>451</width>
+        <height>281</height>
        </rect>
       </property>
       <property name="text">
