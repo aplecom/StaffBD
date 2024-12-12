@@ -6,7 +6,12 @@
 #include <QString>
 #include <QSqlTableModel>
 #include <QStringListModel>
-#include<QStringList>
+#include <QStringList>
+#include <QMenu>
+#include <QMenuBar>
+#include <QAction>
+#include <QMessageBox>
+#include <QPainter>
 
 #include "auth_window.h"
 #include "reg_window.h"
@@ -27,10 +32,14 @@ public:
     ~MainWindow();
     void display();
     void printTable();
-
+    void showDefaultPage();
+    void showAdminPage();
+    void showUserPage();
     void resetFields();
     void  setAccPage();
-
+    void setupMenu();
+    void editProfile();
+    void manageUsers();
     void printList();
 
 

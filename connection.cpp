@@ -9,11 +9,13 @@ Connection::Connection(): query(QSqlQuery())
 void Connection::createConneсtion()
 {
     db = QSqlDatabase::addDatabase("QPSQL");
-    db.setDatabaseName("Staff");
-    db.setUserName("ilya");
+    db.setDatabaseName("staffBD");
+    db.setUserName("kexicake");
     db.setPassword("");
+    qDebug()<<db.lastError().text();
     if(!db.open())
-        qDebug()<<"Не удалось открыть БД "<<db.lastError().text();
+        QMessageBox::information(0,"Ошибка", "Не удалось подключиться к БД\n "+db.lastError().text());
+        //qDebug()<<"Не удалось открыть БД "<<db.lastError().text();
     else
         query = QSqlQuery(db);
 }
