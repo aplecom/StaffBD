@@ -12,6 +12,7 @@
 #include <QAction>
 #include <QMessageBox>
 #include <QPainter>
+#include <QWidgetAction>
 
 #include "auth_window.h"
 #include "reg_window.h"
@@ -31,12 +32,13 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void display();
-    void printTable();
+    void printTable(QString tb);
     void showDefaultPage();
     void showAdminPage();
     void showUserPage();
+    void showModerPage();
     void resetFields();
-    void  setAccPage();
+    void setAccPage();
     void setupMenu();
     void editProfile();
     void manageUsers();

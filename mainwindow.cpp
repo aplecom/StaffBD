@@ -45,6 +45,15 @@ void MainWindow::setupMenu()
 {
     QMenuBar *menuBar = this->menuBar();
 
+    // Мейн меню
+    QMenu *mainMenu = new QMenu("Файл", this);
+    QAction *logoutAction = new QAction("Выйти", this);
+
+    mainMenu->addAction(logoutAction);
+
+    menuBar->addMenu(mainMenu);
+
+    // Меню запроса доступа
     QMenu *editMenu = new QMenu("Редактировать", this);
     QAction *editProfileAction = new QAction("Редактировать профиль", this);
     QAction *manageUsersAction = new QAction("Управление пользователями", this);
@@ -54,8 +63,10 @@ void MainWindow::setupMenu()
 
     menuBar->addMenu(editMenu);
 
+
     connect(editProfileAction, &QAction::triggered, this, &MainWindow::editProfile);
     connect(manageUsersAction, &QAction::triggered, this, &MainWindow::manageUsers);
+    connect(logoutAction, &QAction::triggered, this, &MainWindow::on_backBtn_clicked);
 }
 
 void MainWindow::authorizeUser()
@@ -121,13 +132,16 @@ void MainWindow::backWindowAuth()
     ui_auth.show();
 }
 
-void MainWindow::printTable()
+void MainWindow::printTable(QString tb)
 {
-    modelTable->setTable("employees");
+    modelTable->setTable(tb);
     modelTable->sort(0, Qt::AscendingOrder);
     ui_Main->tableView->setModel(modelTable);
-}
 
+
+    ui_Main->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+}
+// TO DO: Перенести все на такой интерфейс
 void MainWindow::printList()
 {
     connection.userData(employees);
@@ -168,7 +182,7 @@ void MainWindow::setAccPage()
         showAdminPage();
         break;
     case 1:
-        showUserPage();
+        showModerPage();
         break;
     default:
         showDefaultPage();
@@ -178,39 +192,61 @@ void MainWindow::setAccPage()
 
 void MainWindow::showAdminPage()
 {
-    printTable();
+    printTable("personalData");
+    //ui_Main->tableView->setEditTriggers(QAbstractItemView::DoubleClicked);
     //ui_Main->adminLabel->setText("Добро пожаловать, администратор");
     // Дополнительные действия для администратора
 }
 
-void MainWindow::showUserPage()
+void MainWindow::showModerPage()
 {
-    printList();
-    //ui_Main->userLabel->setText("Добро пожаловать, пользователь");
-    // Дополнительные действия для пользователя
+    printTable("personalData");
+    //ui_Main->tableView->setEditTriggers(QAbstractItemView::DoubleClicked);
+    //ui_Main->adminLabel->setText("Добро пожаловать, администратор");
+    // Дополнительные действия для модератора таблицы
 }
+
+
+// void MainWindow::showUserPage()
+// {
+//     printTable();
+//     //printList();
+//     //ui_Main->userLabel->setText("Добро пожаловать, пользователь");
+//     // Дополнительные действия для пользователя
+// }
 
 void MainWindow::showDefaultPage()
 {
+    printTable("personalData");
     ui_Main->stackedWidget->setCurrentIndex(0);
+    //ui_Main->tableView->setEditTriggers(QAbstractItemView::DoubleClicked);
+    //ui_Main->tableView->setColumnHidden(0, true);  // Пример скрытия столбца
     //ui_Main->defaultLabel->setText("Добро пожаловать");
     // Действия по умолчанию
 }
 
 void MainWindow::editProfile()
 {
+    if (connection.userAccess(m_username) > 2) {
+        QMessageBox::information(this, "Редактирование таблиц", "У вас нет прав на управление пользователями.");
+        return;
+    }
+    printTable("personalData");
+    ui_Main->tableView->setEditTriggers(QAbstractItemView::DoubleClicked);
     // Логика редактирования профиля
-    QMessageBox::information(this, "Редактировать профиль", "Функция редактирования профиля в разработке.");
+    //QMessageBox::information(this, "Редактировать таблицы", "Функция редактирования таблиц в разработке.");
 }
 
 void MainWindow::manageUsers()
 {
-    if (connection.userAccess(m_username) == 1) {
+    if (connection.userAccess(m_username) > 1) {
         QMessageBox::information(this, "Управление пользователями", "У вас нет прав на управление пользователями.");
         return;
     }
+    printTable("employees");
+    ui_Main->tableView->setEditTriggers(QAbstractItemView::DoubleClicked);
     // Логика управления пользователями
-    QMessageBox::information(this, "Управление пользователями", "Функция управления пользователями в разработке.");
+    //QMessageBox::information(this, "Управление пользователями", "Функция управления пользователями в разработке.");
 }
 
 void MainWindow::on_listView_pressed(const QModelIndex &index)
