@@ -72,6 +72,8 @@ private slots:
 
     void on_listView_pressed(const QModelIndex &index);
 
+    void on_addButton_clicked();
+
 protected:
     void paintEvent(QPaintEvent *event) override;
 };

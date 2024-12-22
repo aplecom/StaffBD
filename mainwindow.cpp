@@ -20,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
     modelList = new QStringListModel;
 
     ui_Main->setupUi(this);
-
     setupMenu();
 }
 
@@ -57,15 +56,18 @@ void MainWindow::setupMenu()
     QMenu *editMenu = new QMenu("Редактировать", this);
     QAction *editProfileAction = new QAction("Редактировать профиль", this);
     QAction *manageUsersAction = new QAction("Управление пользователями", this);
+    //QAction *testLineTable = new QAction("test", this);
 
     editMenu->addAction(editProfileAction);
     editMenu->addAction(manageUsersAction);
+    //editMenu->addAction(testLineTable);
 
     menuBar->addMenu(editMenu);
 
 
     connect(editProfileAction, &QAction::triggered, this, &MainWindow::editProfile);
     connect(manageUsersAction, &QAction::triggered, this, &MainWindow::manageUsers);
+    //connect(testLineTable, &QAction::triggered, this, &MainWindow::printList);
     connect(logoutAction, &QAction::triggered, this, &MainWindow::on_backBtn_clicked);
 }
 
@@ -138,7 +140,6 @@ void MainWindow::printTable(QString tb)
     modelTable->sort(0, Qt::AscendingOrder);
     ui_Main->tableView->setModel(modelTable);
 
-
     ui_Main->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 // TO DO: Перенести все на такой интерфейс
@@ -192,7 +193,7 @@ void MainWindow::setAccPage()
 
 void MainWindow::showAdminPage()
 {
-    printTable("personalData");
+    printTable("personaldata");
     //ui_Main->tableView->setEditTriggers(QAbstractItemView::DoubleClicked);
     //ui_Main->adminLabel->setText("Добро пожаловать, администратор");
     // Дополнительные действия для администратора
@@ -200,7 +201,7 @@ void MainWindow::showAdminPage()
 
 void MainWindow::showModerPage()
 {
-    printTable("personalData");
+    printTable("personaldata");
     //ui_Main->tableView->setEditTriggers(QAbstractItemView::DoubleClicked);
     //ui_Main->adminLabel->setText("Добро пожаловать, администратор");
     // Дополнительные действия для модератора таблицы
@@ -217,8 +218,12 @@ void MainWindow::showModerPage()
 
 void MainWindow::showDefaultPage()
 {
-    printTable("personalData");
+    printTable("personaldata");
     ui_Main->stackedWidget->setCurrentIndex(0);
+    ui_Main->surnameLineEdit->setDisabled(1);
+    ui_Main->nameLineEdit->setDisabled(1);
+    ui_Main->phoneLineEdit->setDisabled(1);
+    ui_Main->emailLineEdit->setDisabled(1);
     //ui_Main->tableView->setEditTriggers(QAbstractItemView::DoubleClicked);
     //ui_Main->tableView->setColumnHidden(0, true);  // Пример скрытия столбца
     //ui_Main->defaultLabel->setText("Добро пожаловать");
@@ -228,10 +233,10 @@ void MainWindow::showDefaultPage()
 void MainWindow::editProfile()
 {
     if (connection.userAccess(m_username) > 2) {
-        QMessageBox::information(this, "Редактирование таблиц", "У вас нет прав на управление пользователями.");
+        QMessageBox::information(this, "Редактирование таблиц", "У вас нет прав на редактирование таблиц.");
         return;
     }
-    printTable("personalData");
+    printTable("personaldata");
     ui_Main->tableView->setEditTriggers(QAbstractItemView::DoubleClicked);
     // Логика редактирования профиля
     //QMessageBox::information(this, "Редактировать таблицы", "Функция редактирования таблиц в разработке.");
@@ -269,3 +274,52 @@ void MainWindow::on_listView_pressed(const QModelIndex &index)
         ui_Main->infoLb->setText("Недостаточно данных о пользователе");
     }
 }
+
+
+void MainWindow::on_addButton_clicked()
+{
+    QString name = ui_Main->nameLineEdit->text();
+    QString surname = ui_Main->surnameLineEdit->text();
+    QString phone = ui_Main->phoneLineEdit->text();
+    QString email = ui_Main->emailLineEdit->text();
+    if (name.isEmpty() || surname.isEmpty() || phone.isEmpty() || email.isEmpty()) {
+        QMessageBox::warning(this, "Ошибка", "Пожалуйста, заполните все обязательные поля.");
+        return;
+    }
+
+    // Добавляем данные в таблицу
+    modelTable->setTable("personaldata");
+    int row = modelTable->rowCount();
+    //При этом запросе почему- срабатывает тригер на id не понятно почему
+    QString querySTR = "SELECT id FROM personaldata ORDER BY id DESC LIMIT 1";
+    QString idSTR;
+    QSqlQuery query;
+    if (query.exec(querySTR)){
+        if (query.next()){
+            idSTR = query.value(0).toString();
+            //QMessageBox::information(0,"Инфо", ""+idSTR);
+        }
+    }
+    modelTable->insertRow(row);
+    modelTable->setData(modelTable->index(row, 1), name);
+    modelTable->setData(modelTable->index(row, 2), surname);
+    modelTable->setData(modelTable->index(row, 3), phone);
+    modelTable->setData(modelTable->index(row, 4), email);
+
+
+
+    // Сохраняем изменения в базе данных
+    if (!modelTable->submitAll()) {
+        QMessageBox::warning(this, "Ошибка", "Не удалось сохранить изменения в базе данных.");
+    } else {
+        QMessageBox::information(this, "Успех", "Данные успешно добавлены.");
+    }
+
+    // Очистить поля формы
+    ui_Main->nameLineEdit->clear();
+    ui_Main->surnameLineEdit->clear();
+    ui_Main->phoneLineEdit->clear();
+    ui_Main->emailLineEdit->clear();
+    printTable("personaldata");
+}
+

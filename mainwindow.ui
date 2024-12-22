@@ -137,6 +137,129 @@ QPushButton:pressed
        <bool>false</bool>
       </attribute>
      </widget>
+     <widget class="QLineEdit" name="nameLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>1680</x>
+        <y>80</y>
+        <width>113</width>
+        <height>26</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="surnameLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>1680</x>
+        <y>120</y>
+        <width>113</width>
+        <height>26</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="phoneLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>1680</x>
+        <y>160</y>
+        <width>113</width>
+        <height>26</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="emailLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>1680</x>
+        <y>200</y>
+        <width>113</width>
+        <height>26</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="addButton">
+      <property name="geometry">
+       <rect>
+        <x>1680</x>
+        <y>250</y>
+        <width>141</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background: rgba(32, 255, 144, 15);
+	color: white;
+    border-radius: 15px; 
+	border: 2px solid transparent;
+}
+
+QPushButton:hover 
+{   background: rgba(32, 255, 144, 30);
+	border-color: rgba(155, 217, 144);
+}
+
+QPushButton:pressed 
+{   background: rgba(32, 255, 144, 60);
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Добавить</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>1680</x>
+        <y>60</y>
+        <width>58</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Имя</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>1680</x>
+        <y>100</y>
+        <width>58</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Фамилия</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>1680</x>
+        <y>140</y>
+        <width>111</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Номер телефона</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>1680</x>
+        <y>180</y>
+        <width>58</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Email</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="page_2">
      <widget class="QLabel" name="header">
